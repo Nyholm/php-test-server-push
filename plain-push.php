@@ -135,3 +135,5 @@ $url = 'https://http2.golang.org/serverpush';
 $response = get_request($url);
 
 echo strlen($response).': '.$url."\n\n";
+
+echo "pushed URLs: ". count($urls) . "\n";
