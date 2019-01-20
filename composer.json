@@ -1,0 +1,13 @@
+{
+    "name": "nyholm/php-test-server-push",
+    "require": {
+        "kriswallsmith/buzz": "dev-master",
+        "nyholm/psr7": "^1.0"
+    },
+    "authors": [
+        {
+            "name": "Nyholm",
+            "email": "tobias.nyholm@gmail.com"
+        }
+    ]
+}
