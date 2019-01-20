@@ -57,7 +57,7 @@ function get_request($url)
     $mh = curl_multi_init();
 
     curl_multi_setopt($mh, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX);
-    //curl_multi_setopt($mh, CURLMOPT_PUSHFUNCTION, $cb);
+    curl_multi_setopt($mh, CURLMOPT_PUSHFUNCTION, $cb);
 
     $curl = curl_init();
     curl_reset($curl);
@@ -76,7 +76,6 @@ function get_request($url)
     curl_setopt($curl, CURLOPT_FAILONERROR, false);
 
     $originalResponseContent = '';
-    echo "Test 4\n";
 
     //FIXME Using timeout will weirdly disable pushed responses (content will be empty)
     //curl_setopt($curl, CURLOPT_TIMEOUT, 30);
@@ -84,7 +83,7 @@ function get_request($url)
     // -----------
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, false);
     //FIXME These 2 lines will case segmentation fault
-    /*
+
     curl_setopt($curl, CURLOPT_HEADERFUNCTION, function ($ch, $data) {
         return strlen($data);
     });
@@ -92,11 +91,8 @@ function get_request($url)
         $originalResponseContent .= $data;
         return strlen($data);
     });
-    */
 
-    echo "Test 5\n";
     curl_multi_add_handle($mh, $curl);
-
 
     // Start fetching the responses.
     $content = null;
@@ -105,7 +101,6 @@ function get_request($url)
         $mrc = curl_multi_exec($mh, $active);
     } while ($mrc == CURLM_CALL_MULTI_PERFORM);
 
-    echo "Test 6\n";
     while ($active && $mrc == CURLM_OK) {
         curl_multi_select($mh);
         do {
@@ -114,17 +109,12 @@ function get_request($url)
 
         while ($info = curl_multi_info_read($mh))
         {
-            echo "Test 6d\n";
             if ($info['msg'] == CURLMSG_DONE) {
-
-                echo "Test 6e\n";
                 $handle = $info['handle'];
                 if ($handle !== null) {
-                    echo "Test 7\n";
                     $content = curl_multi_getcontent($handle);
                     $url = getUrl($handle);
 
-                    echo "Test 8\n";
                     // Debug
                     echo strlen($content).': '.$url."\n";
 
@@ -134,8 +124,6 @@ function get_request($url)
                 }
             }
         }
-
-
     }
 
     curl_multi_close($mh);
@@ -143,9 +131,7 @@ function get_request($url)
     return $originalResponseContent;
 }
 
-echo "Test 1\n";
 $url = 'https://http2.golang.org/serverpush';
 $response = get_request($url);
 
-echo "fgoo";
 echo strlen($response).': '.$url."\n\n";
