@@ -59,7 +59,4 @@ RUN set -xe \
 	&& apk add --no-cache --virtual .php-rundeps $runDeps \
 	&& apk del .build-deps
 
-COPY . /usr/src/myapp
-WORKDIR /usr/src/myapp
-
-CMD [ "php", "./test3744.php" ]
+CMD ["php", "-a"]
