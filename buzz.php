@@ -26,5 +26,5 @@ $timeOtherRequests = microtime(true)-$start;
 
 var_dump("\n\n\n\nFirst: ".$timeFirstRequest. "\nOther: ".$timeOtherRequests. "\n\n");
 
-$this->assertTrue($timeFirstRequest > $timeOtherRequests);
-$this->assertFalse(true, "First: ".$timeFirstRequest. "\nOther: ".$timeOtherRequests. "\n");
+var_dump($timeFirstRequest > $timeOtherRequests);
+echo "First: ".$timeFirstRequest. "\nOther: ".$timeOtherRequests. "\n";

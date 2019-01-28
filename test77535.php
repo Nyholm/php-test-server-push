@@ -37,13 +37,11 @@ class MyHttpClient
         $stillRunning = null;
         while (true) {
             do {
-                // Start processing each handler in the stack
                 $mrc = curl_multi_exec($this->mh, $stillRunning);
             } while (CURLM_CALL_MULTI_PERFORM === $mrc);
 
             $info = curl_multi_info_read($this->mh);
             while (false !== $info && $info['msg'] == CURLMSG_DONE) {
-                // handle any completed requests
                 if (CURLMSG_DONE !== $info['msg']) {
                     continue;
                 }
@@ -54,7 +52,6 @@ class MyHttpClient
 
     private function addServerPushCallback(): void
     {
-
         $callback = static function () {
             return CURL_PUSH_OK;
         };
@@ -64,5 +61,5 @@ class MyHttpClient
     }
 }
 
-$buzz = new MyHttpClient();
-$buzz->sendRequest();
+$client = new MyHttpClient();
+$client->sendRequest();

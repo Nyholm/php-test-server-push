@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Buzz\Client;
-
 use Buzz\Configuration\ParameterBag;
 use Buzz\Exception\ClientException;
 use Buzz\Message\ResponseBuilder;
