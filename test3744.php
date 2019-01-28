@@ -12,6 +12,7 @@ $callback = function($parent, $passed) use (&$transfers) {
     $transfers++;
     return CURL_PUSH_OK;
 };
+
 $mh = curl_multi_init();
 curl_multi_setopt($mh, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX);
 curl_multi_setopt($mh, CURLMOPT_PUSHFUNCTION, $callback);
