@@ -1,9 +1,13 @@
 {
     "name": "nyholm/php-test-server-push",
     "require": {
-        "kriswallsmith/buzz": "dev-master",
+        "kriswallsmith/buzz": "dev-server-push-issue",
         "nyholm/psr7": "^1.0"
     },
+    "repositories": [
+        { "type": "vcs", "url": "https://github.com/Nyholm/buzz"}
+
+    ],
     "authors": [
         {
             "name": "Nyholm",
