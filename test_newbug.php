@@ -1,6 +1,6 @@
 <?php
 
-class MultiCurl
+class MyHttpClient
 {
     private $mh;
     private $curl;
@@ -64,5 +64,5 @@ class MultiCurl
     }
 }
 
-$buzz = new MultiCurl();
+$buzz = new MyHttpClient();
 $buzz->sendRequest();
