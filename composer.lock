@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d70b18f742a10d545844ee87c23abfed",
+    "content-hash": "797a7f6d4c7a1005b579bd1c3da08b72",
     "packages": [
         {
             "name": "kriswallsmith/buzz",
-            "version": "dev-master",
+            "version": "dev-server-push-issue",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kriswallsmith/Buzz.git",
-                "reference": "b1185f9dbd212d0c1d302454e44466c4da3a260b"
+                "url": "https://github.com/Nyholm/Buzz.git",
+                "reference": "8dc059a3a5f74cb5581050918d6f735a608cf670"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/b1185f9dbd212d0c1d302454e44466c4da3a260b",
-                "reference": "b1185f9dbd212d0c1d302454e44466c4da3a260b",
+                "url": "https://api.github.com/repos/Nyholm/Buzz/zipball/8dc059a3a5f74cb5581050918d6f735a608cf670",
+                "reference": "8dc059a3a5f74cb5581050918d6f735a608cf670",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,19 @@
                     "Buzz\\": "lib"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Buzz\\Test\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/simple-phpunit --testsuite Unit"
+                ],
+                "test-ci": [
+                    "vendor/bin/simple-phpunit --coverage-text --coverage-clover=build/coverage.xml"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -71,7 +83,10 @@
                 "curl",
                 "http client"
             ],
-            "time": "2019-01-03T12:59:02+00:00"
+            "support": {
+                "source": "https://github.com/Nyholm/Buzz/tree/server-push-issue"
+            },
+            "time": "2019-01-28T19:26:29+00:00"
         },
         {
             "name": "nyholm/psr7",
