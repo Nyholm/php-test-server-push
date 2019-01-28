@@ -5,12 +5,13 @@ class MultiCurl
     private $mh;
     private $curl;
 
-    /**
-     * This is a blocking function call.
-     */
     public function sendRequest()
     {
+        if (false === $this->mh = curl_multi_init()) {
+            throw new \RuntimeException('Unable to create a new cURL multi handle');
+        }
 
+        // FIXME Using a function like this does not work. If we inline the contents of addServerPushCallback(), then we got no problem
         $this->addServerPushCallback();
 
         $this->curl = curl_init();
@@ -33,14 +34,12 @@ class MultiCurl
         curl_multi_add_handle($this->mh, $this->curl);
 
 
+        $stillRunning = null;
         while (true) {
-            $exception = null;
-            $stillRunning = null;
             do {
                 // Start processing each handler in the stack
                 $mrc = curl_multi_exec($this->mh, $stillRunning);
             } while (CURLM_CALL_MULTI_PERFORM === $mrc);
-
 
             $info = curl_multi_info_read($this->mh);
             while (false !== $info && $info['msg'] == CURLMSG_DONE) {
@@ -55,9 +54,7 @@ class MultiCurl
 
     private function addServerPushCallback(): void
     {
-        if (false === $this->mh = curl_multi_init()) {
-            throw new \RuntimeException('Unable to create a new cURL multi handle');
-        }
+
         $callback = static function () {
             return CURL_PUSH_OK;
         };
